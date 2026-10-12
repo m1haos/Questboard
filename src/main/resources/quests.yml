@@ -1,0 +1,289 @@
+# The quest pool. Players get a random selection of "daily" and "weekly" quests (see rotation in config.yml).
+#
+#   period:    daily or weekly
+#   goal:      break (blocks), kill (mobs), fish (caught items), craft (items), travel (blocks on foot or mount)
+#   targets:   what counts. Ids without the minecraft: prefix, or #tag for a vanilla tag such as #logs.
+#              An empty list means anything. Not used by travel.
+#   amount:    how many are needed
+#   icon:      item shown in /quests
+#   weight:    chance of being picked, higher is more often (default 1)
+#   title, description: a plain string or a map of language to string. MiniMessage works here.
+#   rewards:   a list of
+#                - item: DIAMOND        amount: 2
+#                - xp: 150
+#                - command: "eco give <player> 250"   label: "250 coins"
+#
+# New quests are picked up with /quests reload. Quests that a player already holds keep their progress.
+
+quests:
+  stone-cutter:
+    period: daily
+    goal: break
+    targets: [stone, deepslate, granite, diorite, andesite]
+    amount: 80
+    icon: IRON_PICKAXE
+    weight: 3
+    title: {en: "Stone cutter", ru: "Каменотёс"}
+    description: {en: "Break 80 blocks of stone.", ru: "Сломайте 80 блоков камня."}
+    rewards:
+      - item: IRON_INGOT
+        amount: 6
+      - xp: 40
+
+  woodcutter:
+    period: daily
+    goal: break
+    targets: ["#logs"]
+    amount: 40
+    icon: IRON_AXE
+    weight: 3
+    title: {en: "Woodcutter", ru: "Дровосек"}
+    description: {en: "Chop 40 logs.", ru: "Срубите 40 брёвен."}
+    rewards:
+      - item: COOKED_BEEF
+        amount: 8
+      - xp: 30
+
+  coal-seeker:
+    period: daily
+    goal: break
+    targets: ["#coal_ores"]
+    amount: 24
+    icon: COAL
+    title: {en: "Coal seeker", ru: "Угольщик"}
+    description: {en: "Mine 24 coal ores.", ru: "Добудьте 24 угольные руды."}
+    rewards:
+      - item: TORCH
+        amount: 32
+      - xp: 40
+
+  iron-vein:
+    period: daily
+    goal: break
+    targets: ["#iron_ores"]
+    amount: 12
+    icon: RAW_IRON
+    title: {en: "Iron vein", ru: "Железная жила"}
+    description: {en: "Mine 12 iron ores.", ru: "Добудьте 12 железных руд."}
+    rewards:
+      - item: GOLD_INGOT
+        amount: 3
+      - xp: 60
+
+  farmer:
+    period: daily
+    goal: break
+    targets: [wheat, carrots, potatoes, beetroots]
+    amount: 50
+    icon: GOLDEN_HOE
+    title: {en: "Farmer", ru: "Фермер"}
+    description:
+      en: "Harvest 50 fully grown crops.\nYoung plants do not count."
+      ru: "Соберите 50 созревших культур.\nМолодые растения не считаются."
+    rewards:
+      - item: GOLDEN_CARROT
+        amount: 6
+      - xp: 40
+
+  monster-hunter:
+    period: daily
+    goal: kill
+    targets: [zombie, skeleton, creeper, spider, husk, stray, drowned, witch]
+    amount: 15
+    icon: IRON_SWORD
+    weight: 3
+    title: {en: "Monster hunter", ru: "Охотник на монстров"}
+    description: {en: "Defeat 15 hostile mobs.", ru: "Победите 15 враждебных мобов."}
+    rewards:
+      - item: IRON_INGOT
+        amount: 4
+      - xp: 60
+
+  creeper-sweep:
+    period: daily
+    goal: kill
+    targets: [creeper]
+    amount: 5
+    icon: GUNPOWDER
+    title: {en: "Creeper sweep", ru: "Зачистка"}
+    description: {en: "Defeat 5 creepers.", ru: "Победите 5 криперов."}
+    rewards:
+      - item: GUNPOWDER
+        amount: 8
+      - xp: 50
+
+  angler:
+    period: daily
+    goal: fish
+    targets: [cod, salmon, tropical_fish, pufferfish]
+    amount: 6
+    icon: FISHING_ROD
+    title: {en: "Angler", ru: "Рыболов"}
+    description: {en: "Catch 6 fish.", ru: "Поймайте 6 рыб."}
+    rewards:
+      - item: COOKED_SALMON
+        amount: 6
+      - xp: 30
+
+  torch-maker:
+    period: daily
+    goal: craft
+    targets: [torch]
+    amount: 48
+    icon: TORCH
+    title: {en: "Light the way", ru: "Свет в тоннель"}
+    description: {en: "Craft 48 torches.", ru: "Скрафтите 48 факелов."}
+    rewards:
+      - item: COAL
+        amount: 16
+      - xp: 30
+
+  baker:
+    period: daily
+    goal: craft
+    targets: [bread, cake, pumpkin_pie, cookie]
+    amount: 12
+    icon: BREAD
+    title: {en: "Baker", ru: "Пекарь"}
+    description: {en: "Bake 12 bread, cookies, pies or cakes.", ru: "Испеките 12 хлебов, печений, пирогов или тортов."}
+    rewards:
+      - item: GOLDEN_CARROT
+        amount: 4
+      - xp: 40
+
+  walker:
+    period: daily
+    goal: travel
+    amount: 1000
+    icon: LEATHER_BOOTS
+    weight: 2
+    title: {en: "Long walk", ru: "Дальняя прогулка"}
+    description: {en: "Travel 1000 blocks.", ru: "Пройдите 1000 блоков."}
+    rewards:
+      - item: COOKED_BEEF
+        amount: 6
+      - xp: 60
+
+  deep-delver:
+    period: weekly
+    goal: break
+    targets: ["#diamond_ores"]
+    amount: 5
+    icon: DIAMOND_PICKAXE
+    title: {en: "Deep delver", ru: "Хозяин глубин"}
+    description: {en: "Mine 5 diamond ores.", ru: "Добудьте 5 алмазных руд."}
+    rewards:
+      - item: DIAMOND
+        amount: 2
+      - xp: 250
+
+  great-miner:
+    period: weekly
+    goal: break
+    targets: ["#base_stone_overworld"]
+    amount: 1500
+    icon: NETHERITE_PICKAXE
+    weight: 2
+    title: {en: "Great miner", ru: "Великий шахтёр"}
+    description: {en: "Break 1500 blocks of stone.", ru: "Сломайте 1500 блоков камня."}
+    rewards:
+      - item: EMERALD
+        amount: 8
+      - xp: 300
+
+  lumberjack:
+    period: weekly
+    goal: break
+    targets: ["#logs"]
+    amount: 600
+    icon: DIAMOND_AXE
+    title: {en: "Lumberjack", ru: "Лесоруб"}
+    description: {en: "Chop 600 logs.", ru: "Срубите 600 брёвен."}
+    rewards:
+      - item: EMERALD
+        amount: 6
+      - xp: 250
+
+  slayer:
+    period: weekly
+    goal: kill
+    targets: [zombie, skeleton, creeper, spider, husk, stray, drowned, witch, enderman, slime]
+    amount: 120
+    icon: DIAMOND_SWORD
+    weight: 2
+    title: {en: "Slayer", ru: "Истребитель"}
+    description: {en: "Defeat 120 hostile mobs.", ru: "Победите 120 враждебных мобов."}
+    rewards:
+      - item: DIAMOND
+        amount: 1
+      - xp: 350
+
+  master-angler:
+    period: weekly
+    goal: fish
+    amount: 40
+    icon: PUFFERFISH
+    title: {en: "Master angler", ru: "Мастер-рыболов"}
+    description: {en: "Catch 40 items with a fishing rod.", ru: "Выловите 40 предметов удочкой."}
+    rewards:
+      - item: NAME_TAG
+        amount: 2
+      - xp: 250
+
+  marathon:
+    period: weekly
+    goal: travel
+    amount: 15000
+    icon: DIAMOND_BOOTS
+    title: {en: "Marathon", ru: "Марафон"}
+    description: {en: "Travel 15000 blocks.", ru: "Пройдите 15000 блоков."}
+    rewards:
+      - item: ENDER_PEARL
+        amount: 4
+      - xp: 400
+
+  harvest-week:
+    period: weekly
+    goal: break
+    targets: [wheat, carrots, potatoes, beetroots, nether_wart]
+    amount: 400
+    icon: HAY_BLOCK
+    title: {en: "Harvest week", ru: "Урожайная неделя"}
+    description: {en: "Harvest 400 fully grown crops.", ru: "Соберите 400 созревших культур."}
+    rewards:
+      - item: EMERALD
+        amount: 5
+      - xp: 250
+
+  blacksmith:
+    period: weekly
+    goal: craft
+    targets: [iron_pickaxe, iron_axe, iron_sword, iron_shovel, iron_hoe, iron_helmet, iron_chestplate,
+              iron_leggings, iron_boots]
+    amount: 6
+    icon: ANVIL
+    title: {en: "Blacksmith", ru: "Кузнец"}
+    description: {en: "Craft 6 iron tools or armour pieces.", ru: "Скрафтите 6 железных инструментов или деталей брони."}
+    rewards:
+      - item: DIAMOND
+        amount: 1
+      - xp: 200
+
+# Bonus for finishing every daily quest on consecutive days. Keys are the day of the streak;
+# after "cycle" days the list starts again, so day 8 gives the day 1 reward.
+streak:
+  cycle: 7
+  rewards:
+    1:
+      - xp: 30
+    3:
+      - item: GOLDEN_APPLE
+        amount: 1
+    5:
+      - item: EMERALD
+        amount: 4
+      - xp: 150
+    7:
+      - item: DIAMOND
+        amount: 3
+      - xp: 400

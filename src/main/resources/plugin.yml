@@ -1,0 +1,35 @@
+name: Questboard
+version: '${version}'
+main: com.mdevstudio.questboard.Questboard
+api-version: '${apiVersion}'
+author: M/Dev Studio
+description: Daily and weekly quests with rewards, a progress bar and a streak bonus
+
+permissions:
+  questboard.use:
+    description: Every player command
+    default: true
+    children:
+      questboard.command.open: true
+      questboard.command.list: true
+      questboard.command.claim: true
+      questboard.command.track: true
+      questboard.command.streak: true
+      questboard.command.help: true
+  questboard.admin:
+    description: Full access to Questboard
+    default: op
+    children:
+      questboard.use: true
+      questboard.command.reload: true
+      questboard.command.reset: true
+      questboard.command.complete: true
+  questboard.command.reload:
+    description: Reload configuration, quests and texts
+    default: op
+  questboard.command.reset:
+    description: Give a player a fresh set of quests
+    default: op
+  questboard.command.complete:
+    description: Finish a quest of a player
+    default: op

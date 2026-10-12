@@ -1,0 +1,67 @@
+config-version: 1
+
+# Message language: ru or en. Texts live in plugins/Questboard/lang/ and can be edited freely.
+language: ru
+
+# Every part of the plugin can be switched off. The quest pool itself is in quests.yml.
+modules:
+  daily: true
+  weekly: true
+  # Bonus for finishing every daily quest several days in a row (needs daily).
+  streak: true
+  # Boss bar at the top of the screen with the progress of one quest.
+  tracker: true
+
+commands:
+  # Extra names for /quests. Command names are read when the server starts, so changes here need a restart.
+  aliases: [quest, qb]
+  # Extra names for each subcommand. The built-in name always works.
+  subcommands:
+    list: [l]
+    claim: [c]
+    track: [t]
+    streak: [s]
+    help: [h]
+    reload: [rl]
+    reset: []
+    complete: []
+
+rotation:
+  # Zone of the reset time: "system" for the server zone or an id like Europe/Moscow.
+  timezone: system
+  # Hour of the day (0-23) when daily quests change. Weekly ones change on the first day below.
+  reset-hour: 4
+  week-starts: MONDAY
+  # How many quests a player gets at once (0-5).
+  daily-count: 3
+  weekly-count: 2
+
+claiming:
+  # true: the reward arrives the moment a quest is finished. false: the player claims it in /quests.
+  auto-claim: false
+
+tracker:
+  # Without a pinned quest the bar shows the unfinished quest that is closest to done.
+  auto-pick: true
+  # PINK, BLUE, RED, GREEN, YELLOW, PURPLE or WHITE.
+  color: BLUE
+
+protection:
+  # Creative and spectator players earn no progress.
+  ignore-creative: true
+  # Mobs from monster spawners do not count for kill quests.
+  ignore-spawner-mobs: true
+  # Blocks a player placed do not count when broken. Fully grown crops always count, young ones never.
+  ignore-placed-blocks: true
+  # Travel is measured once a second; a jump above this many blocks is treated as a teleport.
+  travel-max-step: 64
+
+effects:
+  # Totem particles around the player when a quest is finished.
+  completion-particles: true
+
+sounds:
+  complete: ui.toast.challenge_complete
+  claim: entity.player.levelup
+  streak: block.beacon.activate
+  click: ui.button.click
